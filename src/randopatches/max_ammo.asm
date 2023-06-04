@@ -1,4 +1,3 @@
-lorom
 
 ; change the icons for the missiles, super missiles, and power bombs so we can display maximum amounts
 org $9AB540  ; location in vanilla SM
@@ -43,119 +42,123 @@ org $809B0C
 JSR Missile_Counter  ; person's code has this going to $80CDA0, but that may change so it's looking at a label instead
 
 org $809B1A
-JSR Super_Counter  ; person's code has this going to $80CDAD, but that may change so it's looking at a label instead
+JSR Super_Counter    ; person's code has this going to $80CDAD, but that may change so it's looking at a label instead
 
 org $809B28
-JSR Power_Counter  ; person's code has this going to $80CDBA, but that may change so it's looking at a label instead
+JSR Power_Counter    ; person's code has this going to $80CDBA, but that may change so it's looking at a label instead
 
 org $809C00
 JSR Running_Counter  ; originally LDA $09C8
 
+
 org $80CDA0
 ; luckily this chunk of free space is in the same relative location in the crossover, so no JSRs need to change to JSLs!
 ; copypasta person's code, but removed all of the definitions he created in case of conflicts with additional files being used
-	Missile_Counter:
-		JSR $9D78	;game's original number calculation routine for current ammo
-		LDA $09C8	;max missiles
-		LDX #$0014
-		JMP $9D78	;this time to display the max ammo
-		; RTS
-	
-	Super_Counter:
-		JSR $9D98
-		LDA $09CC	;max supers
-		LDX #$001C
-		JMP $9D98
-		; RTS
-	
-	Power_Counter:
-		JSR $9D98
-		LDA $09D0	;max powers
-		LDX #$0022
-		JMP $9D98
-		; RTS
+    Missile_Counter:
+        JSR $9D78    ;game's original number calculation routine for current ammo
+        LDA $09C8    ;max missiles
+        LDX #$0014
+        JMP $9D78    ;this time to display the max ammo
+        ; RTS
 
-	Running_Counter:
-		PHA : PHX : PHY
-		LDA $09C8
-		BEQ + : JSR MissileMax
-		+ : LDA $09CC
-		BEQ + : JSR SuperMax
-		+ : LDA $09D0
-		BEQ + : JSR PowerMax
-		+ : PLY : PLX : PLA
-		LDA $09C8
-		RTS
-	
-	MissileMax:
-		JSR Triple_Counter
-		LDA $09D2
-		CMP #$0001
-		BEQ +
-		LDA #$1400 : STA $18 : BRA ++							;Load gray color for icons, put in $18
-		+ : LDA #$1000 : STA $18 : ++							;Load green color for icons, put in $18
-		LDX $12 : LDA SM_Numbers,x : ORA $18 : STA $7EC61C	;Draw SM_Numbers
-		LDX $14 : LDA SM_Numbers,x : ORA $18 : STA $7EC61E
-		LDX $16 : LDA SM_Numbers,x : ORA $18 : STA $7EC620
-		LDA #$0049 : ORA $18 : STA $7EC65C		;Load new missile icon, pieced together from graphics starting at D3200, and store them to the HUD
-		LDA #$004A : ORA $18 : STA $7EC65E
-		LDA #$004B : ORA $18 : STA $7EC660
-		RTS
-		
-	SuperMax:
-		JSR Double_Counter
-		LDA $09D2
-		CMP #$0002
-		BEQ +
-		LDA #$1400 : STA $18 : BRA ++
-		+ : LDA #$1000 : STA $18 : ++
-		LDX $14 : LDA SM_Numbers,x : ORA $18 : STA $7EC624
-		LDX $16 : LDA SM_Numbers,x : ORA $18 : STA $7EC626
-		LDA #$0034 : ORA $18 : STA $7EC664
-		LDA #$0035 : ORA $18 : STA $7EC666
-		RTS
-		
-	PowerMax:
-		JSR Double_Counter
-		LDA $09D2
-		CMP #$0003
-		BEQ +
-		LDA #$1400 : STA $18 : BRA ++
-		+ : LDA #$1000 : STA $18 : ++
-		LDX $14 : LDA SM_Numbers,x : ORA $18 : STA $7EC62A
-		LDX $16 : LDA SM_Numbers,x : ORA $18 : STA $7EC62C
-		LDA #$0036 : ORA $18 : STA $7EC66A
-		LDA #$0037 : ORA $18 : STA $7EC66C
-		RTS
-		
-	Triple_Counter:								;Current Missile counter: brain melting simple math
-		STA $4204							;ex 125. 125/?
-		SEP #$20
-		LDA #$64 : STA $4206					;xxx/100
-		PHA : PLA : PHA : PLA					;...125/100...
-		REP #$20
-		LDA $4214 : ASL A : STA $12	;qoutient = 1. 1*2 then store
-		LDA $4216 : STA $4204			;remainder = 25
-		SEP #$20
-		LDA #$0A : STA $4206					;xx/10
-		PHA : PLA : PHA : PLA					;...25/10...
-		REP #$20
-		LDA $4214 : ASL A : STA $14		;qoutient = 2. 2*2 then store
-		LDA $4216 : ASL A : STA $16		;remainder = 5. 5*2 then store
-		RTS
-		
-	Double_Counter:
-		STA $4204
-		SEP #$20
-		LDA #$0A : STA $4206
-		PHA : PLA : PHA : PLA
-		REP #$20
-		LDA $4214 : ASL A : STA $14
-		LDA $4216 : ASL A : STA $16
-		RTS
-		
-	SM_Numbers:
-		DW #$0045, #$003C, #$003D, #$003E, #$003F, #$0040, #$0041, #$0042, #$0043, #$0044
+    Super_Counter:
+        JSR $9D98
+        LDA $09CC    ;max supers
+        LDX #$001C
+        JMP $9D98
+        ; RTS
+
+    Power_Counter:
+        JSR $9D98
+        LDA $09D0    ;max powers
+        LDX #$0022
+        JMP $9D98
+        ; RTS
+
+    Running_Counter:
+        PHA : PHX : PHY
+        LDA $09C8
+        BEQ + : JSR MissileMax
+        + : LDA $09CC
+        BEQ + : JSR SuperMax
+        + : LDA $09D0
+        BEQ + : JSR PowerMax
+        + : PLY : PLX : PLA
+        LDA $09C8
+        RTS
+
+    MissileMax:
+        JSR Triple_Counter
+        LDA $09D2
+        CMP #$0001
+        BEQ +
+        LDA #$1400 : STA $18 : BRA ++                            ;Load gray color for icons, put in $18
+        + : LDA #$1000 : STA $18 : ++                            ;Load green color for icons, put in $18
+        LDX $12 : LDA SM_Numbers,x : ORA $18 : STA $7EC61C    ;Draw SM_Numbers
+        LDX $14 : LDA SM_Numbers,x : ORA $18 : STA $7EC61E
+        LDX $16 : LDA SM_Numbers,x : ORA $18 : STA $7EC620
+        LDA #$0049 : ORA $18 : STA $7EC65C        ;Load new missile icon, pieced together from graphics starting at D3200, and store them to the HUD
+        LDA #$004A : ORA $18 : STA $7EC65E
+        LDA #$004B : ORA $18 : STA $7EC660
+        RTS
+
+    SuperMax:
+        JSR Double_Counter
+        LDA $09D2
+        CMP #$0002
+        BEQ +
+        LDA #$1400 : STA $18 : BRA ++
+        + : LDA #$1000 : STA $18 : ++
+        LDX $14 : LDA SM_Numbers,x : ORA $18 : STA $7EC624
+        LDX $16 : LDA SM_Numbers,x : ORA $18 : STA $7EC626
+        LDA #$0034 : ORA $18 : STA $7EC664
+        LDA #$0035 : ORA $18 : STA $7EC666
+        RTS
+
+    PowerMax:
+        JSR Double_Counter
+        LDA $09D2
+        CMP #$0003
+        BEQ +
+        LDA #$1400 : STA $18 : BRA ++
+        + : LDA #$1000 : STA $18 : ++
+        LDX $14 : LDA SM_Numbers,x : ORA $18 : STA $7EC62A
+        LDX $16 : LDA SM_Numbers,x : ORA $18 : STA $7EC62C
+        LDA #$0036 : ORA $18 : STA $7EC66A
+        LDA #$0037 : ORA $18 : STA $7EC66C
+        RTS
+
+    Triple_Counter:                         ;Current Missile counter: brain melting simple math
+        STA $4204                           ;ex 125. 125/?
+        SEP #$20
+        LDA #$64 : STA $4206                    ;xxx/100
+        PHA : PLA : PHA : PLA                   ;...125/100...
+        REP #$20
+        LDA $4214 : ASL A : STA $12         ;quotient = 1. 1*2 then store
+        LDA $4216 : STA $4204               ;remainder = 25
+        SEP #$20
+        LDA #$0A : STA $4206                    ;xx/10
+        PHA : PLA : PHA : PLA                   ;...25/10...
+        REP #$20
+        LDA $4214 : ASL A : STA $14         ;quotient = 2. 2*2 then store
+        LDA $4216 : ASL A : STA $16         ;remainder = 5. 5*2 then store
+        RTS
+
+    Double_Counter:
+        STA $4204
+        SEP #$20
+        LDA #$0A : STA $4206
+        PHA : PLA : PHA : PLA
+        REP #$20
+        LDA $4214 : ASL A : STA $14
+        LDA $4216 : ASL A : STA $16
+        RTS
+
+    SM_Numbers:
+        DW #$0045, #$003C, #$003D, #$003E, #$003F, #$0040, #$0041, #$0042, #$0043, #$0044
+
+warnpc $80D000
+
 
 org $858851
 ; data, message boxes specifically

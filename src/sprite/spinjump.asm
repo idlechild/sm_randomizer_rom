@@ -1,8 +1,8 @@
 ; --- new control code routine ---
 
 ; This sets up for screw attack without space jump.
-; First off, we need a new control code that checks for space jump, so that we
-; can gate the animation appropriately.
+; First off, we need a new control code that checks for space jump,
+; so that we can gate the animation appropriately.
 
 org $908688
 control_code_routine:
@@ -30,9 +30,10 @@ control_code_routine:
     SEC                 ; flag the carry bit because reasons
     RTS
 
+warnpc $9086C6
+
 
 ; Hook the subroutine to control code $F5
-
 org $90832E
     dw control_code_routine
 

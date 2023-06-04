@@ -42,16 +42,16 @@ org $a9b20c : db $03, $00
 
 ; Fix Morph & Missiles room state
 org $8fe652
- morph_missiles:
-     lda.l $7ed873
-     beq .no_items
-     bra .items
+morph_missiles:
+    lda.l $7ed873
+    beq .no_items
+    bra .items
 org $8fe65f
  .items
 org $8fe666
  .no_items    
 
- ; Fix heat damage speed echoes bug
+; Fix heat damage speed echoes bug
 org $91b629
     db $01
 

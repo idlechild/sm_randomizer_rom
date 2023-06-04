@@ -1,5 +1,4 @@
 ; custom credits
-lorom
 math pri on
 
 ; Defines for the script and credits data
@@ -71,6 +70,7 @@ org $8095e5
 nmi:
     ldx #$00
     stx $05b4
+    ;stx $05ba
     ldx $05b5
     inx
     stx $05b5
@@ -93,6 +93,7 @@ org $809602
     pld
     plb
     rti
+warnpc $809616
 
 ; Patch soft reset to save the value of the RTA timer
 org $80fe00
@@ -206,6 +207,8 @@ patch_load:
     clc
     plb
     rtl
+
+warnpc $81ff00
 
 ; Hijack after decompression of regular credits tilemaps
 org $8be0d1
@@ -1220,7 +1223,6 @@ stats:
     dw 26,      credits_stats_ammo+!row*10,     1, 0    ; Bombs
     dw 0,       0,                              0, 0    ; end of table
 
-warnpc $dfffff
 
 ; Relocated credits tilemap to free space in bank CE
 org $ceb240

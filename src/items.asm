@@ -39,6 +39,7 @@ org $8f8432+$5
 
 ; Add custom PLM that can asynchronously load in items
 org $84efe0
+custom_item_plm_array:
     dw i_visible_item_setup, v_item       ;efe0
     dw i_visible_item_setup, c_item       ;efe4
     dw i_hidden_item_setup,  h_item       ;efe8
@@ -532,4 +533,5 @@ mw_call_receive:
     jsr ($0000,x)
     rtl
 
+warnpc $84ff00
 pullpc

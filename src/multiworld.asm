@@ -151,6 +151,7 @@ org $828BB3
 
 namespace message
 org $859643
+mw_data_start:
     dw !PlaceholderBig, !Big, item_sent
     dw !PlaceholderBig, !Big, item_received
     dw !KeycardBig,     !Big, keycard
@@ -179,8 +180,8 @@ keycard:
 cleartable
 
 btn_array:
-	DW $0000, $012A, $012A, $012C, $012C, $012C, $0000, $0000, $0000, $0000, $0000, $0000, $0120, $0000, $0000
-	DW $0000, $0000, $0000, $012A, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
+    DW $0000, $012A, $012A, $012C, $012C, $012C, $0000, $0000, $0000, $0000, $0000, $0000, $0120, $0000, $0000
+    DW $0000, $0000, $0000, $012A, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
     DW $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
     DW $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
     DW $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
@@ -341,23 +342,25 @@ char_table:
     ;    P      Q      R      S      T      U      V      W      X      Y      Z      [      \      ]      ^      _   
     dw $38EF, $38F0, $38F1, $38F2, $38F3, $38F4, $38F5, $38F6, $38F7, $38F8, $38F9, $38FE, $38FE, $38FE, $38FE, $38FE
 
+warnpc $85FF00
+
 org $858749
 fix_1c1f:
     LDA $CE     ; if $CE is set, it overrides the message box
     BEQ +
     STA $1C1F
     STZ $CE     ; Clear $CE
-+	LDA $1C1F
-	CMP #$001D
-	BPL +
-	RTS
++   LDA $1C1F
+    CMP #$001D
+    BPL +
+    RTS
 +
-	ADC #$027F
-	RTS
+    ADC #$027F
+    RTS
 EmptyBig:
-	REP #$30
+    REP #$30
     LDY #$0000
-	JMP $841D
+    JMP $841D
 PlaceholderBig:
     REP #$30
     JSR write_placeholders
@@ -368,15 +371,16 @@ KeycardBig:
     JSR write_keycard
     LDY #$0000
     JMP $841D
+warnpc $85877F
 
 org $858243
-	JSR fix_1c1f
+    JSR fix_1c1f
 
 org $8582E5
-	JSR fix_1c1f
+    JSR fix_1c1f
 
 org $858413
-	DW btn_array
+    DW btn_array
 
 pullpc
 namespace off

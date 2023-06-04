@@ -1,4 +1,3 @@
-lorom
 
 ; This skips the intro
 org $82eeda
@@ -41,3 +40,6 @@ introskip_doorflags:
 .ret:   
     lda #$0000
     rtl
+
+warnpc $80ffc0
+

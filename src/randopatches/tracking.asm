@@ -1,4 +1,3 @@
-lorom
 
 ; RTA Timer (timer 1 is frames, and timer 2 is number of times frames rolled over)
 !timer1 = $05b8
@@ -38,7 +37,7 @@ org $90b9a1
 
 ; Firing SBAs
 org $90ccde
-    jmp fire_sba_local	
+    jmp fire_sba_local
 
 ;Missiles/supers fired
 org $90beb7
@@ -184,7 +183,7 @@ missiles_fired:
 
 ;bombs/PBs laid
 bombs_laid:
-    lda $09d2			; HUD sleection index
+    lda $09d2        ; HUD sleection index
     cmp #$0003
     beq .power_bomb
     lda #$001a

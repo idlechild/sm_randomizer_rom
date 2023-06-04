@@ -41,8 +41,12 @@ inject_plms:
 .end
     jsl $8FE8A3  ; Execute door ASM
     rtl
+warnpc $8ff800
 
 org $8ff800
 plm_table:
-;   room,   plm,        yyxx,  args
-dw $0000, $0000,        $0000, $0000       ; End of table
+;   room,   plm,  yyxx,  args
+dw $0000, $0000, $0000, $0000       ; End of table
+
+warnpc $8ffe00
+

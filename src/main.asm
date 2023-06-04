@@ -61,7 +61,8 @@ incsrc items.asm
 org $b88000
 incsrc common.asm
 incsrc randolive.asm
-incsrc multiworld.asm	; Place at end of this block, has own origins
+incsrc multiworld.asm
+warnpc $b8cf00
 
 org $b8cf00
 incsrc seeddata.asm

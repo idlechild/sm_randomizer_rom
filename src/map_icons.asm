@@ -154,12 +154,13 @@ DW $0001, $0000 : DB $00 : DW $2422
 DoorB_Icon_Spritemap:
 DW $0001, $0000 : DB $00 : DW $2423
 
-warnpc $82FF6A
+warnpc $82FD00
 
 ; Spritemap pointers
 ; Index = (local_address - $C569) / 2
 ; Note that this means the spritemaps have to start on odd numbered addresses
 org $82FF6B
+map_icons_spritemap_pointers:
 DW Door1_Icon_Spritemap ; Index $1D01
 DW Door2_Icon_Spritemap ; Index $1D02
 org $82FF7F

@@ -1,10 +1,12 @@
 
 ; Set door asm pointer (Door going into the corridor before G4)
 org $838c5c
-    db $00, $fe
+green_pirates_shaft_door_pointer:
+    dw g4_door
 
 ; Door ASM to set the G4 open event bit if all major bosses are killed
 org $8ffe00
+g4_door:
     lda $7ed828
     bit.w #$0100
     beq +
@@ -20,3 +22,6 @@ org $8ffe00
     sta $7ed820
 +
     rts
+
+warnpc $8fff00
+
