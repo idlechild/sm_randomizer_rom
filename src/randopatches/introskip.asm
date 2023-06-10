@@ -1,7 +1,7 @@
 
 ; This skips the intro
-org $82eeda
-    db $1f
+org $82eed9
+    lda #$001f
 
 ; Hijack init routine to autosave and set door flags
 org $828067

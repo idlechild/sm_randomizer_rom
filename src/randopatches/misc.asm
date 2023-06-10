@@ -1,44 +1,109 @@
 ; Removes Gravity Suit heat protection
-org $8de37d
-    db $01
-org $90e9dd
-    db $01
+org $8de37c
+    and #$0001
+
+; Grants acid damage reduction to Varia instead of Gravity
+org $90e9dc
+    bit #$0001
 
 ; Suit acquisition animation skip
 org $848717
-    db $ea, $ea, $ea, $ea
+    nop : nop : nop : nop
 
 ; Mother brain cutscene edits
-org $a98824 : db $01, $00
-org $a98848 : db $01, $00
-org $a98867 : db $01, $00
-org $a9887f : db $01, $00
-org $a98bdb : db $04, $00
-org $a9897d : db $10, $00
-org $a989af : db $10, $00
-org $a989e1 : db $10, $00
-org $a98a09 : db $10, $00
-org $a98a31 : db $10, $00
-org $a98a63 : db $10, $00
-org $a98a95 : db $10, $00
-org $a98b33 : db $10, $00
-org $a98dc6 : db $b0
-org $a98b8d : db $12, $00
-org $a98d74 : db $00, $00
-org $a98d86 : db $00, $00
-org $a98daf : db $00, $01
-org $a98e51 : db $01, $00
-org $a9b93a : db $00, $01
-org $a98eef : db $0a, $00
-org $a98f0f : db $60, $00
-org $a9af4e : db $0a, $00
-org $a9af0d : db $0a, $00
-org $a9b00d : db $00, $00
-org $a9b132 : db $40, $00
-org $a9b16d : db $00, $00
-org $a9b19f : db $20, $00
-org $a9b1b2 : db $30, $00
-org $a9b20c : db $03, $00
+org $a98823
+    lda #$0001
+
+org $a98847
+    lda #$0001
+
+org $a98866
+    lda #$0001
+
+org $a9887e
+    lda #$0001
+
+org $a9897c
+    lda #$0010
+
+org $a989ae
+    lda #$0010
+
+org $a989e0
+    lda #$0010
+
+org $a98a08
+    lda #$0010
+
+org $a98a30
+    lda #$0010
+
+org $a98a62
+    lda #$0010
+
+org $a98a94
+    lda #$0010
+
+org $a98b33
+mother_brain_main_tube_falling_parameter:
+    dw #$0010
+
+org $a98b8c
+    adc #$0012
+
+org $a98bda
+    adc #$0004
+
+org $a98d73
+    lda #$0000
+
+org $a98d85
+    lda #$0000
+
+org $a98dae
+; no change from vanilla
+;    lda #$0100
+
+org $a98dc6
+    bcs $23
+
+org $a98e50
+    and #$0001
+
+org $a98eee
+    lda #$000a
+
+org $a98f0e
+    lda #$0060
+
+org $a9af0c
+    lda #$000a
+
+org $a9af4d
+    lda #$000a
+
+org $a9b00c
+    lda #$0000
+
+org $a9b131
+    adc #$0040
+
+org $a9b16c
+    lda #$0000
+
+org $a9b19e
+    lda #$0020
+
+org $a9b1b1
+    lda #$0030
+
+org $a9b20b
+    lda #$0003
+
+org $a9b939
+; no change from vanilla
+;    lda #$0100
+
 
 ; Fix Morph & Missiles room state
 org $8fe652
@@ -46,30 +111,37 @@ morph_missiles:
     lda.l $7ed873
     beq .no_items
     bra .items
+warnpc $8fe65f
+
 org $8fe65f
- .items
+.items
+
 org $8fe666
- .no_items    
+.no_items
 
 ; Fix heat damage speed echoes bug
 org $91b629
+pose_definitions_table:
     db $01
 
 ; Disable GT Code
 org $aac91c
-    db $80
+    bra $3f
 
 ; Disable Space/time
-org $82b175
-    db $01
+org $82b174
+    ldx #$0001
 
 ; Fix Morph Ball Hidden/Chozo PLM's
 org $84e8ce
-    db $04
+morph_ball_chozo_plm_equipment:
+    dw $0004
+
 org $84ee02
-    db $04
+morph_ball_hidden_plm_equipment:
+    dw $0004
 
 ; Fix Screw Attack selection in menu
-org $82b4c5
-    db $0c
+org $82b4c4
+    cpx #$000c
 

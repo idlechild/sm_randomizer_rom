@@ -1,7 +1,14 @@
+
+org $8CE3E9
+palettes_data_intro:
 incbin "data/palette_sepia.bin" -> $8CE569+2
 
+org $8CE5E9
+palettes_data_ship_intro:
 incbin "data/palette_ship_intro.bin" -> $8CE689+2
 
+org $8DCA4E
+palettes_data_ship_glow_instruction_list:
 incbin "data/palette_ship_glow.bin":(0*2)-(1*2)   -> $8DCA4E+6+(0*6)
 incbin "data/palette_ship_glow.bin":(1*2)-(2*2)   -> $8DCA4E+6+(1*6)
 incbin "data/palette_ship_glow.bin":(2*2)-(3*2)   -> $8DCA4E+6+(2*6)
@@ -17,6 +24,8 @@ incbin "data/palette_ship_glow.bin":(11*2)-(12*2) -> $8DCA4E+6+(11*6)
 incbin "data/palette_ship_glow.bin":(12*2)-(13*2) -> $8DCA4E+6+(12*6)
 incbin "data/palette_ship_glow.bin":(13*2)-0      -> $8DCA4E+6+(13*6)
 
+org $8DD6BA
+palettes_data_ship_outro_instruction_list:
 incbin "data/palette_ship_outro.bin":(0*30)-(1*30)   -> $8DD6BA+2+6+(0*$24)
 incbin "data/palette_ship_outro.bin":(1*30)-(2*30)   -> $8DD6BA+2+6+(1*$24)
 incbin "data/palette_ship_outro.bin":(2*30)-(3*30)   -> $8DD6BA+2+6+(2*$24)
@@ -34,6 +43,8 @@ incbin "data/palette_ship_outro.bin":(13*30)-(14*30) -> $8DD6BA+2+6+(13*$24)
 incbin "data/palette_ship_outro.bin":(14*30)-(15*30) -> $8DD6BA+2+6+(14*$24)
 incbin "data/palette_ship_outro.bin":(15*30)-0       -> $8DD6BA+2+6+(15*$24)
 
+org $8DDB62
+palettes_data_power_suit_instruction_list:
 incbin "data/palette_power_loader.bin":(0*30)-(1*30) -> $8DDB62+2+$009
 incbin "data/palette_power_loader.bin":(1*30)-(2*30) -> $8DDB62+2+$02D
 incbin "data/palette_power_loader.bin":(2*30)-(3*30) -> $8DDB62+2+$058
@@ -44,6 +55,8 @@ incbin "data/palette_power_loader.bin":(6*30)-(7*30) -> $8DDB62+2+$0F6
 incbin "data/palette_power_loader.bin":(7*30)-(8*30) -> $8DDB62+2+$11A
 incbin "data/palette_power_loader.bin":(8*30)-0      -> $8DDB62+2+$142
 
+org $8DDCC8
+palettes_data_varia_suit_instruction_list:
 incbin "data/palette_varia_loader.bin":(0*30)-(1*30) -> $8DDCC8+2+$009
 incbin "data/palette_varia_loader.bin":(1*30)-(2*30) -> $8DDCC8+2+$02D
 incbin "data/palette_varia_loader.bin":(2*30)-(3*30) -> $8DDCC8+2+$058
@@ -54,6 +67,8 @@ incbin "data/palette_varia_loader.bin":(6*30)-(7*30) -> $8DDCC8+2+$0F6
 incbin "data/palette_varia_loader.bin":(7*30)-(8*30) -> $8DDCC8+2+$11A
 incbin "data/palette_varia_loader.bin":(8*30)-0      -> $8DDCC8+2+$142
 
+org $8DDE2E
+palettes_data_gravity_suit_instruction_list:
 incbin "data/palette_gravity_loader.bin":(0*30)-(1*30) -> $8DDE2E+2+$009
 incbin "data/palette_gravity_loader.bin":(1*30)-(2*30) -> $8DDE2E+2+$02D
 incbin "data/palette_gravity_loader.bin":(2*30)-(3*30) -> $8DDE2E+2+$058
@@ -64,6 +79,8 @@ incbin "data/palette_gravity_loader.bin":(6*30)-(7*30) -> $8DDE2E+2+$0F6
 incbin "data/palette_gravity_loader.bin":(7*30)-(8*30) -> $8DDE2E+2+$11A
 incbin "data/palette_gravity_loader.bin":(8*30)-0      -> $8DDE2E+2+$142
 
+org $8DE45E
+palettes_data_power_suit_in_heat_instruction_list:
 incbin "data/palette_power_heat.bin":(0*30)-(1*30)   -> $8DE45E+$A+(0*$22)
 incbin "data/palette_power_heat.bin":(1*30)-(2*30)   -> $8DE45E+$A+(1*$22)
 incbin "data/palette_power_heat.bin":(2*30)-(3*30)   -> $8DE45E+$A+(2*$22)
@@ -81,6 +98,8 @@ incbin "data/palette_power_heat.bin":(13*30)-(14*30) -> $8DE45E+$A+(13*$22)
 incbin "data/palette_power_heat.bin":(14*30)-(15*30) -> $8DE45E+$A+(14*$22)
 incbin "data/palette_power_heat.bin":(15*30)-0       -> $8DE45E+$A+(15*$22)
 
+org $8DE68A
+palettes_data_varia_suit_in_heat_instruction_list:
 incbin "data/palette_varia_heat.bin":(0*30)-(1*30)   -> $8DE68A+$A+(0*$22)
 incbin "data/palette_varia_heat.bin":(1*30)-(2*30)   -> $8DE68A+$A+(1*$22)
 incbin "data/palette_varia_heat.bin":(2*30)-(3*30)   -> $8DE68A+$A+(2*$22)
@@ -98,6 +117,8 @@ incbin "data/palette_varia_heat.bin":(13*30)-(14*30) -> $8DE68A+$A+(13*$22)
 incbin "data/palette_varia_heat.bin":(14*30)-(15*30) -> $8DE68A+$A+(14*$22)
 incbin "data/palette_varia_heat.bin":(15*30)-0       -> $8DE68A+$A+(15*$22)
 
+org $8DE8B6
+palettes_data_gravity_suit_in_heat_instruction_list:
 incbin "data/palette_gravity_heat.bin":(0*30)-(1*30)   -> $8DE8B6+$A+(0*$22)
 incbin "data/palette_gravity_heat.bin":(1*30)-(2*30)   -> $8DE8B6+$A+(1*$22)
 incbin "data/palette_gravity_heat.bin":(2*30)-(3*30)   -> $8DE8B6+$A+(2*$22)
@@ -115,6 +136,8 @@ incbin "data/palette_gravity_heat.bin":(13*30)-(14*30) -> $8DE8B6+$A+(13*$22)
 incbin "data/palette_gravity_heat.bin":(14*30)-(15*30) -> $8DE8B6+$A+(14*$22)
 incbin "data/palette_gravity_heat.bin":(15*30)-0       -> $8DE8B6+$A+(15*$22)
 
+org $9B9820
+palettes_data_death_sequence_power_suit:
 incbin "data/palette_power_charge.bin":(0*30)-(1*30) -> $9B9820+2+(0*$20)
 incbin "data/palette_power_charge.bin":(1*30)-(2*30) -> $9B9820+2+(1*$20)
 incbin "data/palette_power_charge.bin":(2*30)-(3*30) -> $9B9820+2+(2*$20)
@@ -124,6 +147,8 @@ incbin "data/palette_power_charge.bin":(5*30)-(6*30) -> $9B9820+2+(5*$20)
 incbin "data/palette_power_charge.bin":(6*30)-(7*30) -> $9B9820+2+(6*$20)
 incbin "data/palette_power_charge.bin":(7*30)-0      -> $9B9820+2+(7*$20)
 
+org $9B9920
+palettes_data_death_sequence_varia_suit:
 incbin "data/palette_varia_charge.bin":(0*30)-(1*30) -> $9B9920+2+(0*$20)
 incbin "data/palette_varia_charge.bin":(1*30)-(2*30) -> $9B9920+2+(1*$20)
 incbin "data/palette_varia_charge.bin":(2*30)-(3*30) -> $9B9920+2+(2*$20)
@@ -133,6 +158,8 @@ incbin "data/palette_varia_charge.bin":(5*30)-(6*30) -> $9B9920+2+(5*$20)
 incbin "data/palette_varia_charge.bin":(6*30)-(7*30) -> $9B9920+2+(6*$20)
 incbin "data/palette_varia_charge.bin":(7*30)-0      -> $9B9920+2+(7*$20)
 
+org $9B9A20
+palettes_data_death_sequence_gravity_suit:
 incbin "data/palette_gravity_charge.bin":(0*30)-(1*30) -> $9B9A20+2+(0*$20)
 incbin "data/palette_gravity_charge.bin":(1*30)-(2*30) -> $9B9A20+2+(1*$20)
 incbin "data/palette_gravity_charge.bin":(2*30)-(3*30) -> $9B9A20+2+(2*$20)
@@ -142,66 +169,92 @@ incbin "data/palette_gravity_charge.bin":(5*30)-(6*30) -> $9B9A20+2+(5*$20)
 incbin "data/palette_gravity_charge.bin":(6*30)-(7*30) -> $9B9A20+2+(6*$20)
 incbin "data/palette_gravity_charge.bin":(7*30)-0      -> $9B9A20+2+(7*$20)
 
+org $9B9B20
+palettes_data_speed_boosting_power_suit:
 incbin "data/palette_power_speed_boost.bin":(0*30)-(1*30) -> $9B9B20+2+(0*$20)
 incbin "data/palette_power_speed_boost.bin":(1*30)-(2*30) -> $9B9B20+2+(1*$20)
 incbin "data/palette_power_speed_boost.bin":(2*30)-(3*30) -> $9B9B20+2+(2*$20)
 incbin "data/palette_power_speed_boost.bin":(3*30)-0      -> $9B9B20+2+(3*$20)
 
+org $9B9BA0
+palettes_data_charged_shinespark_power_suit:
 incbin "data/palette_power_speed_squat.bin":(0*30)-(1*30) -> $9B9BA0+2+(0*$20)
 incbin "data/palette_power_speed_squat.bin":(1*30)-(2*30) -> $9B9BA0+2+(1*$20)
 incbin "data/palette_power_speed_squat.bin":(2*30)-(3*30) -> $9B9BA0+2+(2*$20)
 incbin "data/palette_power_speed_squat.bin":(3*30)-0      -> $9B9BA0+2+(3*$20)
 
+org $9B9C20
+palettes_data_shinespark_power_suit:
 incbin "data/palette_power_shinespark.bin":(0*30)-(1*30) -> $9B9C20+2+(0*$20)
 incbin "data/palette_power_shinespark.bin":(1*30)-(2*30) -> $9B9C20+2+(1*$20)
 incbin "data/palette_power_shinespark.bin":(2*30)-(3*30) -> $9B9C20+2+(2*$20)
 incbin "data/palette_power_shinespark.bin":(3*30)-0      -> $9B9C20+2+(3*$20)
 
+org $9B9CA0
+palettes_data_screw_attack_power_suit:
 incbin "data/palette_power_screw_attack.bin":(0*30)-(1*30) -> $9B9CA0+2+(0*$20)
 incbin "data/palette_power_screw_attack.bin":(1*30)-(2*30) -> $9B9CA0+2+(1*$20)
 incbin "data/palette_power_screw_attack.bin":(2*30)-(3*30) -> $9B9CA0+2+(2*$20)
 incbin "data/palette_power_screw_attack.bin":(3*30)-0      -> $9B9CA0+2+(3*$20)
 
+org $9B9D20
+palettes_data_speed_boosting_varia_suit:
 incbin "data/palette_varia_speed_boost.bin":(0*30)-(1*30) -> $9B9D20+2+(0*$20)
 incbin "data/palette_varia_speed_boost.bin":(1*30)-(2*30) -> $9B9D20+2+(1*$20)
 incbin "data/palette_varia_speed_boost.bin":(2*30)-(3*30) -> $9B9D20+2+(2*$20)
 incbin "data/palette_varia_speed_boost.bin":(3*30)-0      -> $9B9D20+2+(3*$20)
 
+org $9B9DA0
+palettes_data_charged_shinespark_varia_suit:
 incbin "data/palette_varia_speed_squat.bin":(0*30)-(1*30) -> $9B9DA0+2+(0*$20)
 incbin "data/palette_varia_speed_squat.bin":(1*30)-(2*30) -> $9B9DA0+2+(1*$20)
 incbin "data/palette_varia_speed_squat.bin":(2*30)-(3*30) -> $9B9DA0+2+(2*$20)
 incbin "data/palette_varia_speed_squat.bin":(3*30)-0      -> $9B9DA0+2+(3*$20)
 
+org $9B9E20
+palettes_data_shinespark_varia_suit:
 incbin "data/palette_varia_shinespark.bin":(0*30)-(1*30) -> $9B9E20+2+(0*$20)
 incbin "data/palette_varia_shinespark.bin":(1*30)-(2*30) -> $9B9E20+2+(1*$20)
 incbin "data/palette_varia_shinespark.bin":(2*30)-(3*30) -> $9B9E20+2+(2*$20)
 incbin "data/palette_varia_shinespark.bin":(3*30)-0      -> $9B9E20+2+(3*$20)
 
+org $9B9EA0
+palettes_data_screw_attack_varia_suit:
 incbin "data/palette_varia_screw_attack.bin":(0*30)-(1*30) -> $9B9EA0+2+(0*$20)
 incbin "data/palette_varia_screw_attack.bin":(1*30)-(2*30) -> $9B9EA0+2+(1*$20)
 incbin "data/palette_varia_screw_attack.bin":(2*30)-(3*30) -> $9B9EA0+2+(2*$20)
 incbin "data/palette_varia_screw_attack.bin":(3*30)-0      -> $9B9EA0+2+(3*$20)
 
+org $9B9F20
+palettes_data_speed_boosting_gravity_suit:
 incbin "data/palette_gravity_speed_boost.bin":(0*30)-(1*30) -> $9B9F20+2+(0*$20)
 incbin "data/palette_gravity_speed_boost.bin":(1*30)-(2*30) -> $9B9F20+2+(1*$20)
 incbin "data/palette_gravity_speed_boost.bin":(2*30)-(3*30) -> $9B9F20+2+(2*$20)
 incbin "data/palette_gravity_speed_boost.bin":(3*30)-0      -> $9B9F20+2+(3*$20)
 
+org $9B9FA0
+palettes_data_charged_shinespark_gravity_suit:
 incbin "data/palette_gravity_speed_squat.bin":(0*30)-(1*30) -> $9B9FA0+2+(0*$20)
 incbin "data/palette_gravity_speed_squat.bin":(1*30)-(2*30) -> $9B9FA0+2+(1*$20)
 incbin "data/palette_gravity_speed_squat.bin":(2*30)-(3*30) -> $9B9FA0+2+(2*$20)
 incbin "data/palette_gravity_speed_squat.bin":(3*30)-0      -> $9B9FA0+2+(3*$20)
 
+org $9BA020
+palettes_data_shinespark_gravity_suit:
 incbin "data/palette_gravity_shinespark.bin":(0*30)-(1*30) -> $9BA020+2+(0*$20)
 incbin "data/palette_gravity_shinespark.bin":(1*30)-(2*30) -> $9BA020+2+(1*$20)
 incbin "data/palette_gravity_shinespark.bin":(2*30)-(3*30) -> $9BA020+2+(2*$20)
 incbin "data/palette_gravity_shinespark.bin":(3*30)-0      -> $9BA020+2+(3*$20)
 
+org $9BA0A0
+palettes_data_screw_attack_gravity_suit:
 incbin "data/palette_gravity_screw_attack.bin":(0*30)-(1*30) -> $9BA0A0+2+(0*$20)
 incbin "data/palette_gravity_screw_attack.bin":(1*30)-(2*30) -> $9BA0A0+2+(1*$20)
 incbin "data/palette_gravity_screw_attack.bin":(2*30)-(3*30) -> $9BA0A0+2+(2*$20)
 incbin "data/palette_gravity_screw_attack.bin":(3*30)-0      -> $9BA0A0+2+(3*$20)
 
+org $9BA120
+palettes_data_death_sequence_samus:
 incbin "data/palette_death.bin":(0*30)-(1*30) -> $9BA120+2+(0*$20)
 incbin "data/palette_death.bin":(1*30)-(2*30) -> $9BA120+2+(1*$20)
 incbin "data/palette_death.bin":(2*30)-(3*30) -> $9BA120+2+(2*$20)
@@ -212,6 +265,8 @@ incbin "data/palette_death.bin":(6*30)-(7*30) -> $9BA120+2+(6*$20)
 incbin "data/palette_death.bin":(7*30)-(8*30) -> $9BA120+2+(7*$20)
 incbin "data/palette_death.bin":(8*30)-0      -> $9BA120+2+(8*$20)
 
+org $9BA240
+palettes_hyper_beam:
 incbin "data/palette_hyper.bin":(0*30)-(1*30) -> $9BA240+2+(0*$20)
 incbin "data/palette_hyper.bin":(1*30)-(2*30) -> $9BA240+2+(1*$20)
 incbin "data/palette_hyper.bin":(2*30)-(3*30) -> $9BA240+2+(2*$20)
@@ -223,9 +278,19 @@ incbin "data/palette_hyper.bin":(7*30)-(8*30) -> $9BA240+2+(7*$20)
 incbin "data/palette_hyper.bin":(8*30)-(9*30) -> $9BA240+2+(8*$20)
 incbin "data/palette_hyper.bin":(9*30)-0      -> $9BA240+2+(9*$20)
 
+org $9BA380
+palettes_hurt_flash:
 incbin "data/palette_sepia_hurt.bin" -> $9BA380+2
-incbin "data/palette_sepia.bin"      -> $9BA3A0+2
 
+org $9BA3A0
+palettes_intro_greyscale:
+incbin "data/palette_sepia.bin" -> $9BA3A0+2
+
+org $9BA3C0
+palettes_xray_visor_colors:
 incbin "data/palette_xray.bin" -> $9BA3C0
 
+org $A2A59E
+palettes_gunship:
 incbin "data/palette_ship_standard.bin" -> $A2A59E+2
+

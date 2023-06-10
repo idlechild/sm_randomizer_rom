@@ -10,7 +10,6 @@
 gun_port_dma = $9A9A00
 
 org $9086AF
-
 gun_port_table:
 
     !i = 0
@@ -24,7 +23,10 @@ gun_port_table:
     !i #= !i+1
     endif
 
+warnpc $9087BD
+
 org $90C7A5
+gun_port_table_pointers:
 
     dw gun_port_table+(0*8)
     dw gun_port_table+(1*8)
@@ -37,6 +39,8 @@ org $90C7A5
     dw gun_port_table+(8*8)
     dw gun_port_table+(9*8)
 
+warnpc $90C7B9
+
 
 ; --- reassign gun port tilemaps ---
 
@@ -46,8 +50,12 @@ org $90C7A5
 !gun_port_tile = $DF
 !gun_port_flags = $28DF
 
-org $90C786    ; DMA dest address based on tile number
-    dw $6000+(!gun_port_tile*$10)
+org $90C785    ; DMA dest address based on tile number
+    lda #($6000+(!gun_port_tile*$10))
 
 org $90C791    ; Set tilemap index and flags
+gun_port_table_flags:
     rep 10 : dw !gun_port_flags
+
+warnpc $90C7A5
+

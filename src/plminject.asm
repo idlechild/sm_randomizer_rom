@@ -6,6 +6,7 @@
 ; Hijack room loading to be able to inject arbitrary PLM:s into a room
 org $82e8d5
     jsl inject_plms
+
 org $82eb8b
     jsl inject_plms
 

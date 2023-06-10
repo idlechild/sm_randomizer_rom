@@ -4,14 +4,29 @@
 ; swapped to avoid larger DMAs overwriting later ones. Swap the commands in
 ; $80:9382-93CA with $80:93CB-9413, but most are identical so just change these:
 
-org $809382+1 : db $1E
-org $809389+1 : db $21
-org $80938E+1 : db $80
-org $8093B6+1 : db $80
-org $8093CB+1 : db $1D
-org $8093D2+1 : db $1F
-org $8093D7+1 : db $00
-org $8093FF+1 : db $00
+org $809382
+    LDY $071E
+
+org $809389
+    LDA $0721
+
+org $80938E
+    LDA #$6080
+
+org $8093B6
+    LDA #$6180
+
+org $8093CB
+    LDY $071D
+
+org $8093D2
+    LDA $071F
+
+org $8093D7
+    LDA #$6000
+
+org $8093FF
+    LDA #$6100
 
 
 ; --- disable upper bypass ---
@@ -23,6 +38,7 @@ org $8093FF+1 : db $00
 ; you have to use a bypass routine, so the null routine is reused for all cases.
 
 org $90864E
+samus_half_draw_function_pointer_table:
     rep 28 : dw $8686
 
 
@@ -32,6 +48,7 @@ org $90864E
 ; superfluous so we solve that by making it transparent.
 
 org $9AD620
+samus_suit_green_light_tile:
     rep $20 : db $00
 
 
@@ -140,3 +157,4 @@ org $9BB6F5
 
 org $9BB6E5
     JSR death_routine
+

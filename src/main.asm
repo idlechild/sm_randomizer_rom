@@ -1,36 +1,43 @@
 lorom
 
 macro a8()
-	sep #$20
+    sep #$20
 endmacro
 
 macro a16()
-	rep #$20
+    rep #$20
 endmacro
 
 macro i8()
-	rep #$10
+    rep #$10
 endmacro
 
 macro ai8()
-	sep #$30
+    sep #$30
 endmacro
 
 macro ai16()
-	rep #$30
+    rep #$30
 endmacro
 
 macro i16()
-	rep #$10
+    rep #$10
 endmacro
 
-org $00ffc0
+org $80ffc0
+game_header_name:
     ;   0              f01234
     db "      SM RANDOMIZER  "
-    db $30, $02, $0C, $04, $00, $01, $00, $20, $07, $DF, $F8
+warnpc $80ffd5
 
-org $808000				; Disable copy protection screen
-	db $ff
+org $80ffd8
+game_header_sram_size:
+    db $04
+
+
+org $808000                ; Disable copy protection screen
+disable_copy_protection:
+    db $ff
 
 ; Config flags
 incsrc config.asm
@@ -66,9 +73,31 @@ warnpc $b8cf00
 
 org $b8cf00
 incsrc seeddata.asm
+warnpc $b8d000
 
 org $b8d000
 incsrc playertable.asm
+warnpc $b8e000
 
 org $b8e000
 incsrc itemtable.asm
+
+; Level data contained in separate ips patches
+org $c3bd6d
+level_data_moat_ips:
+
+org $c59755
+level_data_early_super_bridge_ips:
+
+org $c684ee
+level_data_red_tower_ips:
+
+org $c6b91c
+level_data_spazer_ips:
+
+org $c6ecc9
+level_data_nova_boost_platform_ips:
+
+org $c7aa70
+level_data_high_jump_ips:
+

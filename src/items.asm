@@ -27,12 +27,14 @@
 pushpc
 
 org $898000
-    incbin "data/newitems.bin"
+new_items_entire_bank89:
+incbin "data/newitems.bin"
 
 org $8f8432
-    dw $efe0
-org $8f8432+$5
-    db $22
+terminator_custom_item_plm:
+    dw custom_item_plm_array
+    db $07, $2A
+    dw $2208
 
 ;org $8095f7
 ;    jsl nmi_read_messages : nop

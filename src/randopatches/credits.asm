@@ -29,6 +29,7 @@ math pri on
 ; Patch soft reset to retain value of RTA counter
 org $80844B
     jml patch_reset1
+
 org $808490
     jml patch_reset2
 

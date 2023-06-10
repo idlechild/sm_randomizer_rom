@@ -379,8 +379,8 @@ org $858243
 org $8582E5
     JSR fix_1c1f
 
-org $858413
-    DW btn_array
+org $858412
+    LDA btn_array,X
 
 pullpc
 namespace off

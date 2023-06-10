@@ -7,7 +7,9 @@
 ;DW $0001
 ;DB $F8, $01, $F8, $00, $30
 
-org $92BEC1+4 : db $28
+org $92BEBF+6
+samus_bugfix_pose_top_half_facing_right_walljump_spacejump_screwattack:
+    db $28
 
 
 ; Last byte should be $28, like everything else
@@ -15,7 +17,9 @@ org $92BEC1+4 : db $28
 ;DW $0001
 ;DB $F8, $01, $F8, $00, $10
 
-org $92BC7C+4 : db $28
+org $92BC7A+6
+samus_bugfix_pose_top_half_facing_left_walljump_spacejump_screwattack:
+    db $28
 
 
 ; Last byte should be $68, like everything else
@@ -23,7 +27,9 @@ org $92BC7C+4 : db $28
 ;DW $0004
 ;DB $FD, $01, $0F, $0A, $78
 
-org $92AEE3+4 : db $68
+org $92AEE1+6
+samus_bugfix_pose_bottom_half_facing_right_damage_boost:
+    db $68
 
 
 ; Last byte should be $38, just like the other elevator poses
@@ -31,4 +37,9 @@ org $92AEE3+4 : db $68
 ;DW $0001
 ;DB $F8, $01, $F8, $00, $30
 
-org $92A12E+4 : db $38
+; Note: This fix is overwritten by dmadata.asm
+;org $92A12C+6
+;samus_bugfix_pose_top_half_facing_forward:
+;    db $38
+
+

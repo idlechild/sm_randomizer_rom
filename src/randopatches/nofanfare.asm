@@ -265,6 +265,7 @@
 
 org $858490
     JSR CLIPLEN
+
 org $85FF00
 CLIPLEN:
     PHA
@@ -282,8 +283,10 @@ CLIPLEN:
 org $82E126
     JSL CLIPCHECK
     BRA $08
+
 org $858089
     BRA $02
+
 org $848BF2
 NORMAL:
     JSR CLIPSET

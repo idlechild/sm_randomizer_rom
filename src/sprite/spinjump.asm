@@ -30,11 +30,12 @@ control_code_routine:
     SEC                 ; flag the carry bit because reasons
     RTS
 
-warnpc $9086C6
+warnpc $9086AF
 
 
 ; Hook the subroutine to control code $F5
 org $90832E
+hook_control_code_routine:
     dw control_code_routine
 
 
@@ -63,12 +64,14 @@ org $908482
 ; need to move some JSR pointers.
 
 org $918014+(11*2)
+movement_type_table:
     dw $8066, $8066, $8066, $8189, $8086, $8066, $8066, $8066, $8066, $8066
 
 
 ; New screw attack sequence. Leaves 10 bytes to spare.
 
 org $91812D
+animation_delay_screw_attack:
     db $04, $F5                                                   ; $F5 forces the decision about which sequence to draw
     db $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01 ; old screw attack
     db $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01
@@ -78,11 +81,14 @@ org $91812D
     db $FE, $18
     db $08, $FF                                                   ; this gives the wall jump prompt when close to a wall
 
+warnpc $91816F
+
 
 ; The subroutine at $91:80BE-8109 is unreachable. The walljump sequence is
 ; relocate to this space. Leaves 1 byte to spare.
 
 org $9180BE
+animation_delay_walljump:
     db $05, $05                                                   ; lead up into a jump
     db $FB                                                        ; this chooses the type of jump. we have augmented this subroutine
     db $03, $02, $03, $02, $03, $02, $03, $02                     ; spin jump
@@ -96,11 +102,17 @@ org $9180BE
     db $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01
     db $FE, $18
 
+warnpc $91810A
+
 
 ; Hook the new sequences
 
 org $91B010+(2*$81)
-    dw $812D, $812D, $80BE, $80BE
+animation_delay_table:
+    dw animation_delay_screw_attack
+    dw animation_delay_screw_attack
+    dw animation_delay_walljump
+    dw animation_delay_walljump
 
 
 ; Because of this code some things need to be fixed:
