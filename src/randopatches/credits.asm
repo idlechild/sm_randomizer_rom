@@ -29,7 +29,6 @@ math pri on
 ; Patch soft reset to retain value of RTA counter
 org $80844B
     jml patch_reset1
-
 org $808490
     jml patch_reset2
 
@@ -67,6 +66,9 @@ org $a2ab13
     jsl game_end
 
 ; Patch NMI to skip resetting 05ba and instead use that as an extra time counter
+org $80959c
+    beq nmi_inc
+
 org $8095e5
 nmi:
     ldx #$00
@@ -76,17 +78,12 @@ nmi:
     inx
     stx $05b5
     inc $05b6
-.inc:
+nmi_inc:
     ;rep #$30
     ;inc $05b8
     jsl nmi_read_messages
-    bne +
+    bne .end
     inc $05ba
-+
-    bra .end
-
-org $809602
-    bra .inc
 .end:
     ply
     plx
@@ -1223,6 +1220,8 @@ stats:
     dw 24,      credits_stats_ammo+!row*8,      1, 0    ; Power Bombs
     dw 26,      credits_stats_ammo+!row*10,     1, 0    ; Bombs
     dw 0,       0,                              0, 0    ; end of table
+
+warnpc $dff000
 
 
 ; Relocated credits tilemap to free space in bank CE

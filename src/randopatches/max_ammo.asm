@@ -82,14 +82,14 @@ org $80CDA0
         ; RTS
 
     Running_Counter:
-        PHA : PHX : PHY
+        PHX : PHY
         LDA $09C8
         BEQ + : JSR MissileMax
         + : LDA $09CC
         BEQ + : JSR SuperMax
         + : LDA $09D0
         BEQ + : JSR PowerMax
-        + : PLY : PLX : PLA
+        + : PLY : PLX
         LDA $09C8
         RTS
 
