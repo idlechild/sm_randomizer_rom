@@ -18,6 +18,33 @@ if !DEBUG_IH
 !IH_DECIMAL = #$0CCB
 
 
+; In debug mode, apply GT code at the start
+; Override GT code starting values
+org $AAC91E
+    LDA #$05DB    ; starting health
+
+org $AAC927
+    LDA #$0190    ; starting reserves
+
+org $AAC930
+    LDA #$00E6    ; starting missiles
+
+org $AAC939
+    LDA #$0032    ; starting supers/pbs
+
+org $AAC942
+    ; To avoid glitched beam we need to turn off spazer
+    ; Combine Supers and PBs assignments to make room for the OR instruction
+    STA $09CE
+    STA $09D0
+    LDA #$F32F    ; starting equipment
+    STA $09A2
+    STA $09A4
+    LDA #$100B    ; starting beams
+    STA $09A6
+    ORA #$0004    ; collect spazer
+warnpc $AAC95A
+
 ; The default HUD minimap should be cleared
 org $8098BF
 ih_default_HUD_row_0:
@@ -35,8 +62,8 @@ org $80997F
 ih_default_HUD_row_3:
     dw #$2C0F, #$2C0F, #$2C0F, #$2C0F, #$2C0F, #$2C0F
 
-org $809AF3      ; skip initializing minimap
-    NOP : NOP : NOP : NOP
+org $809AF3      ; skip initializing minimap, apply GT code instead
+    JSL $AAC91E
 
 org $809B4C      ; hijack, HUD routine
     JSL ih_hud_code : NOP
