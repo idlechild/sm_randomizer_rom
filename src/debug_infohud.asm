@@ -3,10 +3,18 @@
 ; Only enabled for debugging purposes.
 ;
 
+!DEBUG_IH_ROOM = 0
 !DEBUG_IH_SAMUS_XY = 0
+!DEBUG_IH_START = 0
 
 !DEBUG_IH = 0
+if !DEBUG_IH_ROOM
+!DEBUG_IH = 1
+endif
 if !DEBUG_IH_SAMUS_XY = 1
+!DEBUG_IH = 1
+endif
+if !DEBUG_IH_START
 !DEBUG_IH = 1
 endif
 
@@ -99,20 +107,48 @@ ih_hud_code:
     PLB
     PLB
 
+if !DEBUG_IH_ROOM
+    LDX #$002E : LDA !IH_BLANK : JSR DrawChar
+    LDA $079B : JSR Draw4Hex : LDA !IH_BLANK : JSR DrawChar
+    LDA $079F : JSR Draw1 : LDA !IH_BLANK : JSR DrawChar
+    LDA $078D : JSR Draw4Hex : LDA !IH_BLANK : JSR DrawChar
+    LDX #$006E : LDA !IH_BLANK : JSR DrawChar
+    LDA $0911 : JSR Draw4Hex : LDA !IH_BLANK : JSR DrawChar
+    LDA $0915 : JSR Draw4Hex : LDA !IH_BLANK : JSR DrawChar
+    LDX #$00AE : LDA !IH_BLANK : JSR DrawChar
+    LDA $0AF6 : AND #$FF00 : XBA : CLC
+    ADC $07A1 : ASL #3 : JSR Draw3Hex : LDA !IH_BLANK : JSR DrawChar
+    LDA $0AFA : AND #$FF00 : XBA : INC : CLC
+    ADC $07A3 : ASL #3 : JSR Draw3Hex : LDA !IH_BLANK : JSR DrawChar
+    LDA $0AFA : LSR #4 : INC #2 : JSR Draw2LSB
+    LDA $0AF6 : LSR #3 : DEC : LSR : JSR Draw2LSB
+endif
+
 if !DEBUG_IH_SAMUS_XY
-    LDA $0AF6 : LDX #$0070 : JSR Draw4
-    LDA $0AF8 : INX : INX : JSR Draw4Hex
-    LDA $0AFA : LDX #$00B0 : JSR Draw4
-    LDA $0AFC : INX : INX : JSR Draw4Hex
-    LDA !IH_DECIMAL : STA !HUD_TILEMAP+$78 : STA !HUD_TILEMAP+$B8
-    LDA !IH_BLANK : STA !HUD_TILEMAP+$6E : STA !HUD_TILEMAP+$82
-    STA !HUD_TILEMAP+$AE : STA !HUD_TILEMAP+$C2
+    LDX #$006E : LDA !IH_BLANK : JSR DrawChar
+    LDA $0AF6 : JSR Draw4 : LDA !IH_DECIMAL : JSR DrawChar
+    LDA $0AF8 : JSR Draw4Hex : LDA !IH_BLANK : JSR DrawChar
+    LDX #$00AE : LDA !IH_BLANK : JSR DrawChar
+    LDA $0AFA : JSR Draw4 : LDA !IH_DECIMAL : JSR DrawChar
+    LDA $0AFC : JSR Draw4Hex : LDA !IH_BLANK : JSR DrawChar
 endif
 
     PLB
     ; overwritten code
     LDA $7E09C0
     RTL
+}
+
+Draw1:
+{
+    ASL : TAY : LDA.w NumberGFXTable,Y
+}
+
+DrawChar:
+{
+    STA !HUD_TILEMAP+$00,X
+    INX #2
+    RTS
 }
 
 Draw2:
@@ -137,6 +173,37 @@ Draw2:
   .blanktens
     LDA !IH_BLANK : STA !HUD_TILEMAP+$00,X
     BRA .done
+}
+
+Draw2MSB:
+{
+    STA $12 : AND #$F000              ; get first digit (X000)
+    XBA : LSR #3                      ; move it to last digit (000X) and shift left one
+    TAY : LDA.w NumberGFXTable,Y      ; load tilemap address with 2x digit as index
+    STA !HUD_TILEMAP+$00,X            ; draw digit to HUD
+
+    LDA $12 : AND #$0F00              ; (0X00)
+    XBA : ASL
+    TAY : LDA.w NumberGFXTable,Y
+    STA !HUD_TILEMAP+$02,X
+
+    INX #4
+    RTS
+}
+
+Draw2LSB:
+{
+    STA $12 : AND #$00F0              ; get first digit (00X0)
+    LSR #3                            ; move it to last digit (000X) and shift left one
+    TAY : LDA.w NumberGFXTable,Y      ; load tilemap address with 2x digit as index
+    STA !HUD_TILEMAP+$00,X            ; draw digit to HUD
+
+    LDA $12 : AND #$000F              ; (000X)
+    ASL : TAY : LDA.w NumberGFXTable,Y
+    STA !HUD_TILEMAP+$02,X
+
+    INX #4
+    RTS
 }
 
 Draw3:
@@ -176,6 +243,25 @@ Draw3:
   .blankhundreds
     LDA !IH_BLANK : STA !HUD_TILEMAP+$00,X
     BRA .done
+}
+
+Draw3Hex:
+{
+    STA $12 : AND #$0F00              ; get first digit (0X00)
+    XBA : ASL                         ; move it to last digit (000X) and shift left one
+    TAY : LDA.w NumberGFXTable,Y      ; load tilemap address with 2x digit as index
+    STA !HUD_TILEMAP+$00,X            ; draw digit to HUD
+
+    LDA $12 : AND #$00F0              ; (00X0)
+    LSR #3 : TAY : LDA.w NumberGFXTable,Y
+    STA !HUD_TILEMAP+$02,X
+
+    LDA $12 : AND #$000F              ; (000X)
+    ASL : TAY : LDA.w NumberGFXTable,Y
+    STA !HUD_TILEMAP+$04,X
+
+    INX #6
+    RTS
 }
 
 Draw4:
@@ -237,7 +323,7 @@ Draw4Hex:
     STA $12 : AND #$F000              ; get first digit (X000)
     XBA : LSR #3                      ; move it to last digit (000X) and shift left one
     TAY : LDA.w NumberGFXTable,Y      ; load tilemap address with 2x digit as index
-    STA !HUD_TILEMAP+$00,X                     ; draw digit to HUD
+    STA !HUD_TILEMAP+$00,X            ; draw digit to HUD
 
     LDA $12 : AND #$0F00              ; (0X00)
     XBA : ASL
@@ -251,6 +337,8 @@ Draw4Hex:
     LDA $12 : AND #$000F              ; (000X)
     ASL : TAY : LDA.w NumberGFXTable,Y
     STA !HUD_TILEMAP+$06,X
+
+    INX #8
     RTS
 }
 

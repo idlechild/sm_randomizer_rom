@@ -5,12 +5,129 @@
 ; Requires adding a new save station with ID: 7 for the correct region in the save station table as well.
 ;
 
-!savestation_id = $07
+!START_ROOM_ID = $E82C
+!START_ROOM_REGION = $0007
+!START_ROOM_DOOR = $ABC4
+!START_ROOM_SCREEN_X = $0000
+!START_ROOM_SCREEN_Y = $0000
+!START_ROOM_SAMUS_Y = $0098
+!START_ROOM_SAMUS_X_OFFSET = $FFB0
+!START_ROOM_MAP_X = $0000
+!START_ROOM_MAP_Y = $0000
+!START_ROOM_TILE_XY = $0B02
 
-org $82e8d5
-    jsl inject_savestation
-org $82eb8b
-    jsl inject_savestation
+!START_SAVESTATION_ID = $0007
+
+org $80c527
+crateria_start_load_station:
+    dw !START_ROOM_ID
+    dw !START_ROOM_DOOR
+    dw $0000
+    dw !START_ROOM_SCREEN_X
+    dw !START_ROOM_SCREEN_Y
+    dw !START_ROOM_SAMUS_Y
+    dw !START_ROOM_SAMUS_X_OFFSET
+
+org $80c631
+brinstar_start_load_station:
+    dw !START_ROOM_ID
+    dw !START_ROOM_DOOR
+    dw $0000
+    dw !START_ROOM_SCREEN_X
+    dw !START_ROOM_SCREEN_Y
+    dw !START_ROOM_SAMUS_Y
+    dw !START_ROOM_SAMUS_X_OFFSET
+
+org $80c73b
+norfair_start_load_station:
+    dw !START_ROOM_ID
+    dw !START_ROOM_DOOR
+    dw $0000
+    dw !START_ROOM_SCREEN_X
+    dw !START_ROOM_SCREEN_Y
+    dw !START_ROOM_SAMUS_Y
+    dw !START_ROOM_SAMUS_X_OFFSET
+
+org $80c87d
+wrecked_ship_start_load_station:
+    dw !START_ROOM_ID
+    dw !START_ROOM_DOOR
+    dw $0000
+    dw !START_ROOM_SCREEN_X
+    dw !START_ROOM_SCREEN_Y
+    dw !START_ROOM_SAMUS_Y
+    dw !START_ROOM_SAMUS_X_OFFSET
+
+org $80c979
+maridia_start_load_station:
+    dw !START_ROOM_ID
+    dw !START_ROOM_DOOR
+    dw $0000
+    dw !START_ROOM_SCREEN_X
+    dw !START_ROOM_SCREEN_Y
+    dw !START_ROOM_SAMUS_Y
+    dw !START_ROOM_SAMUS_X_OFFSET
+
+org $80ca91
+tourian_start_load_station:
+    dw !START_ROOM_ID
+    dw !START_ROOM_DOOR
+    dw $0000
+    dw !START_ROOM_SCREEN_X
+    dw !START_ROOM_SCREEN_Y
+    dw !START_ROOM_SAMUS_Y
+    dw !START_ROOM_SAMUS_X_OFFSET
+
+org $80cb8d
+ceres_start_load_station:
+    dw !START_ROOM_ID
+    dw !START_ROOM_DOOR
+    dw $0000
+    dw !START_ROOM_SCREEN_X
+    dw !START_ROOM_SCREEN_Y
+    dw !START_ROOM_SAMUS_Y
+    dw !START_ROOM_SAMUS_X_OFFSET
+
+org $80cc7b
+debug_start_load_station:
+    dw !START_ROOM_ID
+    dw !START_ROOM_DOOR
+    dw $0000
+    dw !START_ROOM_SCREEN_X
+    dw !START_ROOM_SCREEN_Y
+    dw !START_ROOM_SAMUS_Y
+    dw !START_ROOM_SAMUS_X_OFFSET
+
+org $82c86f
+crateria_map_icon_save_point_start:
+    dw !START_ROOM_MAP_X
+    dw !START_ROOM_MAP_Y
+
+org $82c8d9
+brinstar_map_icon_save_point_start:
+    dw !START_ROOM_MAP_X
+    dw !START_ROOM_MAP_Y
+
+org $82c93f
+norfair_map_icon_save_point_start:
+    dw !START_ROOM_MAP_X
+    dw !START_ROOM_MAP_Y
+
+org $82c9ad
+wrecked_ship_map_icon_save_point_start:
+    dw !START_ROOM_MAP_X
+    dw !START_ROOM_MAP_Y
+
+org $82ca0f
+maridia_map_icon_save_point_start:
+    dw !START_ROOM_MAP_X
+    dw !START_ROOM_MAP_Y
+
+org $82ca6d
+tourian_map_icon_save_point_start:
+    dw !START_ROOM_MAP_X
+    dw !START_ROOM_MAP_Y
+
 org $82804e
     jsr start_anywhere
 
@@ -18,42 +135,40 @@ org $8ffd00
 startroom_region:
     dw $0000
 startroom_id:
-    dw $92fd
-startroom_save_plm:
-    dw $b76f : db $05, $0a : dw $0007
+    dw $0000
 
 org $82fd00
 start_anywhere:
+if !DEBUG_IH_START
+    lda #!START_ROOM_ID
+else
     lda startroom_id
+endif
     beq .ret
 
     ; Make sure game mode is 1f
     lda $7e0998
     cmp.w #$001f
     bne .ret
-    
+
+if !DEBUG_IH_START
+else
     ; Check if samus saved energy is 00, if it is, run startup code
     lda $7ed7e2
     bne .ret
+endif
 
+if !DEBUG_IH_START
+    lda #!START_ROOM_REGION
+else
     lda startroom_region
-    sta $079F
-    lda #$0007
-    sta $078B
+endif
+    sta $079f
+    lda #!START_SAVESTATION_ID
+    sta $078b
 
 .ret
-    jsr $819B
-    rts
+    jmp $819b
 
-inject_savestation:
-    lda $079b    ; Load room id
-    cmp startroom_id
-    bne .end
-                 
-    ldx.w #startroom_save_plm
-    lda.w $0000, x
-    jsl $84846a  ; create PLM
+warnpc $82fe00
 
-.end
-    jsl $8FE8A3  ; Execute door ASM
-    rtl

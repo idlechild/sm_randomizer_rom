@@ -12,41 +12,33 @@ org $82eb8b
 
 org $8ff700
 inject_plms:
-    ldx #$0000
+    ldx #plm_table
 
 -
     ; Check if the PLM goes in this room, if the table is $0000 then exit
-    lda plm_table, x
+    lda $0000, x
     beq .end
 
     cmp $079b
     bne .next
 
     ; Ok, Spawn the PLM
-    phx 
-    txa
-    clc
-    adc #plm_table+$2
-    tax
-    lda $0000, x
+    inx
+    inx
     jsl $84846a
-    plx
 
 .next
-    txa
-    clc
-    adc #$0008
-    tax
+    inx #6
     bra -
 
 .end
-    jsl $8FE8A3  ; Execute door ASM
-    rtl
+    jml $8FE8A3  ; Execute door ASM
 warnpc $8ff800
 
 org $8ff800
 plm_table:
 ;   room,   plm,  yyxx,  args
+dw !START_ROOM_ID, $b76f, !START_ROOM_TILE_XY, !START_SAVESTATION_ID
 dw $0000, $0000, $0000, $0000       ; End of table
 
 warnpc $8ffe00

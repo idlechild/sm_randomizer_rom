@@ -34,10 +34,12 @@ org $80ffd8
 game_header_sram_size:
     db $04
 
-
 org $808000                ; Disable copy protection screen
 disable_copy_protection:
     db $ff
+
+; Debug infohud patch, only used if IH_DEBUG is defined
+incsrc debug_infohud.asm
 
 ; Config flags
 incsrc config.asm
@@ -56,16 +58,13 @@ incsrc randopatches/tracking.asm
 incsrc randopatches/seed_display.asm
 incsrc randopatches/max_ammo.asm
 
-; Debug infohud patch, only used if IH_DEBUG is defined
-incsrc debug_infohud.asm
+; Start anywhere patch, must precede plminject.asm
+incsrc startanywhere.asm
 
 incsrc map_icons.asm
 incsrc plminject.asm
 incsrc keycards.asm
 incsrc items.asm
-
-; Start anywhere patch, not used right now until graph based generation is in.
-; incsrc startanywhere.asm
 
 ; Add code to the main code bank
 org $b88000
