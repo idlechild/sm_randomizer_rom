@@ -48,29 +48,28 @@ incsrc config.asm
 incsrc sprite/sprite.asm
 
 ; These patches include their own origins and patch locations
+incsrc randopatches/credits.asm
 incsrc randopatches/introskip.asm
-incsrc randopatches/wake_zebes.asm
+incsrc randopatches/layout.asm
+incsrc randopatches/max_ammo.asm
 incsrc randopatches/misc.asm
 incsrc randopatches/nofanfare.asm
-incsrc randopatches/g4_skip.asm
-incsrc randopatches/credits.asm
-incsrc randopatches/tracking.asm
 incsrc randopatches/seed_display.asm
-incsrc randopatches/max_ammo.asm
+incsrc randopatches/tracking.asm
 
 ; Start anywhere patch, must precede plminject.asm
 incsrc startanywhere.asm
 
-incsrc map_icons.asm
-incsrc plminject.asm
 incsrc keycards.asm
 incsrc items.asm
+incsrc map_icons.asm
+incsrc plminject.asm
 
 ; Add code to the main code bank
 org $b88000
 incsrc common.asm
-incsrc randolive.asm
 incsrc multiworld.asm
+incsrc randolive.asm
 warnpc $b8cf00
 
 org $b8cf00

@@ -104,21 +104,6 @@ org $a9b939
 ; no change from vanilla
 ;    lda #$0100
 
-
-; Fix Morph & Missiles room state
-org $8fe652
-morph_missiles:
-    lda.l $7ed873
-    beq .no_items
-    bra .items
-warnpc $8fe65f
-
-org $8fe65f
-.items
-
-org $8fe666
-.no_items
-
 ; Fix heat damage speed echoes bug
 org $91b629
 pose_definitions_table:
