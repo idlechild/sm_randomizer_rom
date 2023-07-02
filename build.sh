@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # Remember to commit an updated build.bat as well if making changes
 
+# Return an error if any command fails
+success=0
+trap success=1 ERR
+
 echo Building Super Metroid Randomizer
 
 find . -name build.py -exec python3 {} \;
@@ -19,3 +23,4 @@ cp sm.ips ../build/sm.ips > /dev/null
 
 cd ..
 echo Done
+exit $success
