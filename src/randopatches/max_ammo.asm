@@ -163,7 +163,7 @@ org $80CDA0
     SM_Numbers:
         DW #$0045, #$003C, #$003D, #$003E, #$003F, #$0040, #$0041, #$0042, #$0043, #$0044
 
-warnpc $80FD00
+warnpc $80D000
 
 
 ; data, message boxes specifically

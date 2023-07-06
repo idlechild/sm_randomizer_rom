@@ -49,6 +49,7 @@ incsrc sprite/sprite.asm
 
 ; These patches include their own origins and patch locations
 incsrc randopatches/credits.asm
+incsrc randopatches/decompression.asm
 incsrc randopatches/introskip.asm
 incsrc randopatches/layout.asm
 incsrc randopatches/max_ammo.asm
