@@ -3,6 +3,34 @@
 ;================================================
 
 ;================================================
+; Noob Bridge
+;================================================
+!START_ROOM_ID = $9FBA
+!START_ROOM_REGION = $0001
+!START_ROOM_DOOR = $8E92
+!START_ROOM_SCREEN_X = $0400
+!START_ROOM_SCREEN_Y = $0000
+!START_ROOM_SAMUS_Y = $00A8
+!START_ROOM_SAMUS_X_OFFSET = $FFF0
+!START_ROOM_MAP_X = $00F8
+!START_ROOM_MAP_Y = $0070
+!START_ROOM_TILE_XY = $0C46
+
+;================================================
+; Three Musketeers
+;================================================
+!START_ROOM_ID = $B656
+!START_ROOM_REGION = $0002
+!START_ROOM_DOOR = $99AE
+!START_ROOM_SCREEN_X = $0100
+!START_ROOM_SCREEN_Y = $0000
+!START_ROOM_SAMUS_Y = $0088
+!START_ROOM_SAMUS_X_OFFSET = $0040
+!START_ROOM_MAP_X = $00F0
+!START_ROOM_MAP_Y = $0020
+!START_ROOM_TILE_XY = $0A1B
+
+;================================================
 ; Main Street
 ;================================================
 !START_ROOM_ID = $CFC9

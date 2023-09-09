@@ -177,5 +177,5 @@ decompression_increment_bank:
     RTS
 }
 
-warnpc $80FD00
+warnpc $80D200
 

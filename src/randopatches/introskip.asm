@@ -7,8 +7,10 @@ org $82eed9
 org $828067
     jsl introskip_doorflags
 
+
 org $80ff00
 introskip_doorflags:
+{
     ; Do some checks to see that we're actually starting a new game
     
     ; Make sure game mode is 1f
@@ -40,6 +42,7 @@ introskip_doorflags:
 .ret:   
     lda #$0000
     rtl
+}
 
 warnpc $80ffc0
 

@@ -12,9 +12,27 @@ original_name = sys.argv[1]
 new_name = sys.argv[2]
 combined_name = sys.argv[3]
 
-original_file = io.open(os.path.join(os.path.dirname(os.path.realpath(__file__)), original_name), "r")
-new_file = io.open(os.path.join(os.path.dirname(os.path.realpath(__file__)), new_name), "w", newline='\n')
-combined_file = io.open(os.path.join(os.path.dirname(os.path.realpath(__file__)), combined_name), "w", newline='\n')
+original_file = None
+new_file = None
+combined_file = None
+
+try:
+   original_file = io.open(os.path.join(os.path.dirname(os.path.realpath(__file__)), original_name), "r")
+except OSError as e:
+   print(f"Unable to open {original_name}: {e}", file=sys.stderr)
+   sys.exit()
+
+try:
+   new_file = io.open(os.path.join(os.path.dirname(os.path.realpath(__file__)), new_name), "w", newline='\n')
+except OSError as e:
+   print(f"Unable to open {new_name}: {e}", file=sys.stderr)
+   sys.exit()
+
+try:
+   combined_file = io.open(os.path.join(os.path.dirname(os.path.realpath(__file__)), combined_name), "w", newline='\n')
+except OSError as e:
+   print(f"Unable to open {combined_name}: {e}", file=sys.stderr)
+   sys.exit()
 
 longest_label = ""
 rows = original_file.readlines()
@@ -62,7 +80,7 @@ for row in rows:
       if " :" in row:
          unnamed_symbol_found = True
       if len(row) > 8:
-         label = row[8:]
+         label = row[8:-1]
          if len(label) > len(longest_label):
             longest_label = label
    elif in_source_files:
@@ -116,8 +134,8 @@ combined_file.close()
 #   sys.exit()
 
 #recommended_max_label_length = 48
-#if len(longest_label) > recommended_max_label_length:
-#   print("sort_debug_symbols.py WARNING labels exceeding recommended length of %d detected" % recommended_max_label_length)
+#if len(longest_label) >= recommended_max_label_length:
+#   print("sort_debug_symbols.py WARNING labels at or exceeding recommended length of %d detected" % recommended_max_label_length)
 #   print("longest label (length %d) = %s" % (len(longest_label), longest_label))
 #   sys.exit()
 

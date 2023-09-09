@@ -58,7 +58,8 @@ incsrc randopatches/nofanfare.asm
 incsrc randopatches/seed_display.asm
 incsrc randopatches/tracking.asm
 
-; Start anywhere patch, must precede plminject.asm
+; Anywhere patches, must precede plminject.asm
+incsrc dooranywhere.asm
 incsrc startanywhere.asm
 
 incsrc keycards.asm
