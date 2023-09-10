@@ -3,9 +3,9 @@
 ; Only enabled for debugging purposes.
 ;
 
-!DEBUG_IH_ROOM = 0
+!DEBUG_IH_ROOM = 1
 !DEBUG_IH_SAMUS_XY = 0
-!DEBUG_IH_START = 0
+!DEBUG_IH_START = 1
 
 !DEBUG_IH = 0
 if !DEBUG_IH_ROOM
@@ -166,11 +166,11 @@ Draw2:
     ; Tens digit
     LDA $16 : BEQ .blanktens : ASL : TAY : LDA.w NumberGFXTable,Y : STA !HUD_TILEMAP+$00,X
 
-  .done
+.done
     INX #4
     RTS
 
-  .blanktens
+.blanktens
     LDA !IH_BLANK : STA !HUD_TILEMAP+$00,X
     BRA .done
 }
@@ -232,15 +232,15 @@ Draw3:
     ; Hundreds digit
     LDA $14 : BEQ .blankhundreds : ASL : TAY : LDA.w NumberGFXTable,Y : STA !HUD_TILEMAP+$00,X
 
-  .done
+.done
     INX #6
     RTS
 
-  .blanktens
+.blanktens
     LDA !IH_BLANK : STA !HUD_TILEMAP+$00,X : STA !HUD_TILEMAP+$02,X
     BRA .done
 
-  .blankhundreds
+.blankhundreds
     LDA !IH_BLANK : STA !HUD_TILEMAP+$00,X
     BRA .done
 }
@@ -301,19 +301,19 @@ Draw4:
     ; Thousands digit
     LDA $12 : BEQ .blankthousands : ASL : TAY : LDA.w NumberGFXTable,Y : STA !HUD_TILEMAP+$00,X
 
-  .done
+.done
     INX #8
     RTS
 
-  .blanktens
+.blanktens
     LDA !IH_BLANK : STA !HUD_TILEMAP+$00,X : STA !HUD_TILEMAP+$02,X : STA !HUD_TILEMAP+$04,X
     BRA .done
 
-  .blankhundreds
+.blankhundreds
     LDA !IH_BLANK : STA !HUD_TILEMAP+$00,X : STA !HUD_TILEMAP+$02,X
     BRA .done
 
-  .blankthousands
+.blankthousands
     LDA !IH_BLANK : STA !HUD_TILEMAP+$00,X
     BRA .done
 }
@@ -376,16 +376,16 @@ Draw4Hundredths:
     ; Thousands digit
     LDA $12 : ASL : TAY : LDA.w NumberGFXTable,Y : STA !HUD_TILEMAP+$00,X
 
-  .done
+.done
     LDA !IH_DECIMAL : STA !HUD_TILEMAP+$02,X
     INX #8
     RTS
 
-  .zerotens
+.zerotens
     LDA #$0C09 : STA !HUD_TILEMAP+$00,X : STA !HUD_TILEMAP+$04,X : STA !HUD_TILEMAP+$06,X
     BRA .done
 
-  .zerohundreds
+.zerohundreds
     LDA #$0C09 : STA !HUD_TILEMAP+$00,X : STA !HUD_TILEMAP+$04,X
     BRA .done
 }

@@ -47,6 +47,10 @@ incsrc config.asm
 ; Super Metroid custom Samus sprite "engine" by Artheau
 incsrc sprite/sprite.asm
 
+; Anywhere patches, must precede layout.asm and plminject.asm
+incsrc dooranywhere.asm
+incsrc startanywhere.asm
+
 ; These patches include their own origins and patch locations
 incsrc randopatches/credits.asm
 incsrc randopatches/decompression.asm
@@ -58,10 +62,6 @@ incsrc randopatches/nofanfare.asm
 incsrc randopatches/seed_display.asm
 incsrc randopatches/tracking.asm
 
-; Anywhere patches, must precede plminject.asm
-incsrc dooranywhere.asm
-incsrc startanywhere.asm
-
 incsrc keycards.asm
 incsrc items.asm
 incsrc map_icons.asm
@@ -70,6 +70,7 @@ incsrc plminject.asm
 ; Add code to the main code bank
 org $b88000
 incsrc common.asm
+incsrc crash.asm
 incsrc multiworld.asm
 incsrc randolive.asm
 warnpc $b8cf00

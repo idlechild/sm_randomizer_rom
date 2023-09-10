@@ -1,20 +1,20 @@
 ;
 ; Patches to support starting at any given location in the game
 ; by injecting a save station at X/Y coordinates in the specified room.
-; 
+;
 ; Requires adding a new save station with ID: 7 for the correct region in the save station table as well.
 ;
 
-!START_ROOM_ID = $E82C
-!START_ROOM_REGION = $0007
-!START_ROOM_DOOR = $ABC4
-!START_ROOM_SCREEN_X = $0000
+!START_ROOM_ID = $9FBA
+!START_ROOM_REGION = $0001
+!START_ROOM_DOOR = $8E92
+!START_ROOM_SCREEN_X = $0400
 !START_ROOM_SCREEN_Y = $0000
-!START_ROOM_SAMUS_Y = $0098
-!START_ROOM_SAMUS_X_OFFSET = $FFB0
-!START_ROOM_MAP_X = $0000
-!START_ROOM_MAP_Y = $0000
-!START_ROOM_TILE_XY = $0B02
+!START_ROOM_SAMUS_Y = $00A8
+!START_ROOM_SAMUS_X_OFFSET = $FFF0
+!START_ROOM_MAP_X = $00F8
+!START_ROOM_MAP_Y = $0070
+!START_ROOM_TILE_XY = $0C46
 
 !START_SAVESTATION_ID = $0007
 
